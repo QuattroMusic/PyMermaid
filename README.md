@@ -51,7 +51,7 @@ flowchart LR
 And many more functions to explore
 
 ## Coverage
-![](ReadmeFiles/GraphCoverage.png)
+![](assets/GraphCoverage.png)
 
 ## Installation
 By simply downloading the folder `PyMermaid` and placing your python file outside of it,
