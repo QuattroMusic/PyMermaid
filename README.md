@@ -65,9 +65,10 @@ Project
            ├── __init__.py
            ├── mermaid.py
            ├── flowchart
-           ├── class_diagram
            ...
 ```
+
+You can see dependencies inside requirements.txt and install them with `pip install -r requirements.txt`.
 
 ## Contributing
 
