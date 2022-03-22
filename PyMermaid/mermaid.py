@@ -1,1 +1,2 @@
 import PyMermaid.flowchart.flowchart as flowchart
+import PyMermaid.sequence_diagram.sequence_diagram as sequence_diagram
