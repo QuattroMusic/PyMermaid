@@ -40,7 +40,7 @@ def add_group(name: str,direction:int = 0) -> _internal.Group:
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> with f.add_group("one") as g1:
     >>>     n1 = f.add_node("test1",shape=f.nodeShape_cylindrical)
     >>>     n2 = f.add_node("test2")
@@ -48,7 +48,7 @@ def add_group(name: str,direction:int = 0) -> _internal.Group:
 
     Alternative usage, where you can link the entire group
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> with f.add_group("one") as g1:
     >>>     g1.add(f.link(f.add_node(),f.add_node()))
     >>> f.link(f.add_node(),g1)
@@ -96,12 +96,12 @@ def add_node(text: str = "", shape: int = 0, style: _internal.NodeStyle = "", cu
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> f.link(f.add_node(),f.add_node())
 
     Alternative usage, saves node as object
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> n1 = f.add_node(customId="test1")
     >>> n2 = f.add_node(customId="test2")
     >>> f.link(n1,n2)
@@ -148,13 +148,13 @@ def add_arrow(text: str = "",type:int = 0,length:int = 1,backArrow: bool = False
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> a = f.add_arrow(type=f.arrowType_normalArrow)
     >>> f.link(f.add_node(),f.add_node(),a)
 
     Alternative usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> a = f.add_arrow(type=f.arrowType_thickArrow)
     >>> f.set_default_arrow(a)
     >>> f.link(f.add_node(),f.add_node())
@@ -208,11 +208,11 @@ def add_node_style(name: str, fill: str = "", border_color: str = "", border_wid
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> s = f.add_node_style("myStyle",fill="#995324")
     >>> f.add_node(style=s)
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> s = f.add_node_style("myStyle",dashed_border_lengths=[6,8])
     >>> f.add_node(style=s)
 
@@ -257,11 +257,11 @@ def add_link_style(line_color: str = "#d3d3d3", line_width: int = 2, text_color:
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> s = f.add_link_style(line_color="#00ff00")
     >>> f.link(f.add_node(),f.add_node(),style=s)
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> s = f.add_link_style(dashed_line_lengths=[10,4])
     >>> f.link(f.add_node(),f.add_node(),style=s)
 
@@ -304,12 +304,12 @@ def link(a: _Union[_internal.Node,_internal.Group, _List[_internal.Node], _List[
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> f.link(f.add_node(),f.add_node())
 
     Alternative usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> a = f.add_arrow(type=f.arrowType_thickArrow)
     >>> f.link(f.add_node()f.add_node(),a)
 
@@ -348,7 +348,7 @@ def evaluate(toFile: bool = False,clear:bool= True) -> str:
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> f.link(f.add_node(),f.add_node())
     >>> print(f.evaluate())
 
@@ -383,7 +383,7 @@ def comment(comment: str) -> None:
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> f.comment('Nodes')
     >>> n1 = f.add_node(shape=1)
     >>> n2 = f.add_node(shape=1)
@@ -425,7 +425,7 @@ def click(node: _internal.Node, link: str) -> None:
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> n1 = f.add_node()
     >>> n2 = f.add_node()
     >>> f.link(n1,n2)
@@ -469,12 +469,12 @@ def RGBtoHEX(r:_Union[_List[int],_Tuple[int,...],int],g:int = 0,b:int = 0) -> st
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> hex = f.RGBtoHEX(40,160,240)
 
     Alternative usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> hex = f.RGBtoHEX([40,160,240])
 
     ==========
@@ -513,19 +513,19 @@ def set_layout(direction: int) -> None:
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> f.set_layout(2)
     >>> f.link(f.add_node(),f.add_node())
 
     Alternative usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> f.set_layout(f.layout_leftToRight)
     >>> f.link(f.add_node(),f.add_node())
 
     Without using the function, the default value is 0
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> #f.set_layout(0)
     >>> f.link(f.add_node(),f.add_node())
 
@@ -560,7 +560,7 @@ def set_default_arrow(arrow: _internal.Arrow()) -> None:
     ---------
     Basic usage
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> a = f.add_arrow(type=f.arrowType_thickArrow)
     >>> f.set_default_arrow(a)
     >>> f.link(f.add_node(),f.add_node())
@@ -568,7 +568,7 @@ def set_default_arrow(arrow: _internal.Arrow()) -> None:
 
     It's the same as writing
 
-    >>> from mermaid.mermaid import flowchart as f
+    >>> from PyMermaid.mermaid import flowchart as f
     >>> a = f.add_arrow(type=f.arrowType_thickArrow)
     >>> f.link(f.add_node(),f.add_node(),a)
     >>> f.link(f.add_node(),f.add_node(),a)
