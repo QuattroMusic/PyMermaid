@@ -30,10 +30,6 @@ class Participant():
         self._addToCode()
 
     def _addToCode(self):
-        if self.name in participantNames:
-            warn("Unable to put two partecipants with the same name",Warning,3)
-            exit()
-
         obj1 = ""
 
         if self.customId != "":
@@ -41,6 +37,10 @@ class Participant():
             self.name = self.customId
         else:
             self.customId = self.name
+
+        if self.name in participantNames:
+            warn("Unable to put two partecipants with the same name",Warning,4)
+            exit()
 
         participantNames.append(self.name)
 
