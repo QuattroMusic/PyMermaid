@@ -6,10 +6,11 @@ from typing import Union as _Union
 from typing import List as _List
 from typing import Tuple as _Tuple
 
+
 # +---------------+
 # | add functions |  ->  returns an object
 # +---------------+
-def add_group(name: str,direction:int = 0) -> _internal.Group:
+def add_group(name: str, direction: int = 0) -> _internal.Group:
     """
     ==========
 
@@ -56,6 +57,7 @@ def add_group(name: str,direction:int = 0) -> _internal.Group:
     ==========
     """
     return _internal.Group(name=name, direction=direction)
+
 
 def add_node(text: str = "", shape: int = 0, style: _internal.NodeStyle = "", customId: str = "") -> _internal.Node:
     """
@@ -109,9 +111,10 @@ def add_node(text: str = "", shape: int = 0, style: _internal.NodeStyle = "", cu
     ==========
     """
 
-    return _internal.Node(text = text, shape = shape, style = style, customId=customId)
+    return _internal.Node(text=text, shape=shape, style=style, customId=customId)
 
-def add_arrow(text: str = "",type:int = 0,length:int = 1,backArrow: bool = False) -> _internal.Arrow:
+
+def add_arrow(text: str = "", type: int = 0, length: int = 1, backArrow: bool = False) -> _internal.Arrow:
     """
     ==========
 
@@ -163,9 +166,10 @@ def add_arrow(text: str = "",type:int = 0,length:int = 1,backArrow: bool = False
 
     ==========
     """
-    return _internal.Arrow(text = text, type = type, length = length, backArrow = backArrow)
+    return _internal.Arrow(text=text, type=type, length=length, backArrow=backArrow)
 
-def add_node_style(name: str, fill: str = "", border_color: str = "", border_width: int = 1,text_color:str = "",dashed_border_lengths:_Union[_List[int],_Tuple[int]] = ()) -> _internal.NodeStyle:
+
+def add_node_style(name: str, fill: str = "", border_color: str = "", border_width: int = 1, text_color: str = "", dashed_border_lengths: _Union[_List[int], _Tuple[int]] = ()) -> _internal.NodeStyle:
     """
     ==========
 
@@ -218,9 +222,10 @@ def add_node_style(name: str, fill: str = "", border_color: str = "", border_wid
 
     ==========
     """
-    return _internal.NodeStyle(name = name, fill = fill, border_color = border_color, border_width = border_width,text_color = text_color,dashed_border_lengths = dashed_border_lengths)
+    return _internal.NodeStyle(name=name, fill=fill, border_color=border_color, border_width=border_width, text_color=text_color, dashed_border_lengths=dashed_border_lengths)
 
-def add_link_style(line_color: str = "#d3d3d3", line_width: int = 2, text_color: str = "", dashed_line_lengths: _Union[_List[int],_Tuple[int]] = ()):
+
+def add_link_style(line_color: str = "#d3d3d3", line_width: int = 2, text_color: str = "", dashed_line_lengths: _Union[_List[int], _Tuple[int]] = ()):
     """
     ==========
 
@@ -267,12 +272,13 @@ def add_link_style(line_color: str = "#d3d3d3", line_width: int = 2, text_color:
 
     ==========
     """
-    return _internal.LinkStyle(line_color = line_color, line_width = line_width, text_color = text_color, dashed_line_lengths = dashed_line_lengths)
+    return _internal.LinkStyle(line_color=line_color, line_width=line_width, text_color=text_color, dashed_line_lengths=dashed_line_lengths)
+
 
 # +-------------------+
 # | general functions |
 # +-------------------+
-def link(a: _Union[_internal.Node,_internal.Group, _List[_internal.Node], _List[_internal.Group], _Tuple[_internal.Node, ...], _Tuple[_internal.Group,...]],b: _Union[_internal.Node,_internal.Group, _List[_internal.Node], _List[_internal.Group], _Tuple[_internal.Node, ...], _Tuple[_internal.Group,...]],arrow: _internal.Arrow = "",style: _internal.LinkStyle = "") -> None:
+def link(a: _Union[_internal.Node, _internal.Group, _List[_internal.Node], _List[_internal.Group], _Tuple[_internal.Node, ...], _Tuple[_internal.Group, ...]], b: _Union[_internal.Node, _internal.Group, _List[_internal.Node], _List[_internal.Group], _Tuple[_internal.Node, ...], _Tuple[_internal.Group, ...]], arrow: _internal.Arrow = "", style: _internal.LinkStyle = "") -> None:
     """
     ==========
 
@@ -315,9 +321,10 @@ def link(a: _Union[_internal.Node,_internal.Group, _List[_internal.Node], _List[
 
     ==========
     """
-    return _internal.link(a = a, b = b, arrow = arrow, style = style)
+    return _internal.link(a=a, b=b, arrow=arrow, style=style)
 
-def evaluate(toFile: bool = False,clear:bool= True) -> str:
+
+def evaluate(toFile: bool = False, clear: bool = True) -> str:
     """
     ==========
 
@@ -355,6 +362,7 @@ def evaluate(toFile: bool = False,clear:bool= True) -> str:
     ==========
     """
     return _internal.evaluate(toFile=toFile, clear=clear)
+
 
 def comment(comment: str) -> None:
     """
@@ -395,6 +403,7 @@ def comment(comment: str) -> None:
     """
     return _internal.comment(comment=comment)
 
+
 def click(node: _internal.Node, link: str) -> None:
     """
     ==========
@@ -434,9 +443,10 @@ def click(node: _internal.Node, link: str) -> None:
 
     ==========
     """
-    return _internal.click(node = node, link = link)
+    return _internal.click(node=node, link=link)
 
-def RGBtoHEX(r:_Union[_List[int],_Tuple[int,...],int],g:int = 0,b:int = 0) -> str:
+
+def RGBtoHEX(r: _Union[_List[int], _Tuple[int, ...], int], g: int = 0, b: int = 0) -> str:
     """
     ==========
 
@@ -480,6 +490,7 @@ def RGBtoHEX(r:_Union[_List[int],_Tuple[int,...],int],g:int = 0,b:int = 0) -> st
     ==========
     """
     return _internal.RGBtoHEX(r=r, g=g, b=b)
+
 
 # +---------------+
 # | set functions |
@@ -531,7 +542,8 @@ def set_layout(direction: int) -> None:
 
     ==========
     """
-    return _internal.set_layout(direction = direction)
+    return _internal.set_layout(direction=direction)
+
 
 def set_default_arrow(arrow: _internal.Arrow()) -> None:
     """
@@ -576,6 +588,7 @@ def set_default_arrow(arrow: _internal.Arrow()) -> None:
     ==========
     """
     return _internal.set_default_arrow(arrow=arrow)
+
 
 # +-----------+
 # | constants |  ->  used instead of numbers inside functions
