@@ -40,7 +40,7 @@ unlinkedNodes = []
 code = []
 
 
-class NodeStyle():
+class NodeStyle:
     def __init__(self, name: str, fill: str = "", border_color: str = "", border_width: int = 1, text_color: str = "", dashed_border_lengths: Union[List[int], Tuple[int]] = ()):
 
         if fill == "" and border_color == "" and border_width == 1 and text_color == "" and dashed_border_lengths == (5, 5):
@@ -71,7 +71,7 @@ class NodeStyle():
         code.append(f"classDef {self.name} {','.join(obj)}")
 
 
-class LinkStyle():
+class LinkStyle:
     def __init__(self, line_color: str = "#d3d3d3", line_width: int = 2, text_color: str = "", dashed_line_lengths: Union[List[int], Tuple[int]] = ()):
         if line_color == "#d3d3d3" and line_width == 2 and text_color == "" and dashed_line_lengths == (5, 5):
             warn("At least one parameter is required", Warning, 3)
@@ -98,12 +98,12 @@ class LinkStyle():
         # code.append(f"classDef {self.name} {','.join(obj)}")
 
 
-class Group():
+class Group:
     def __init__(self, name: str, direction: int = 0):
         self._id = name
         self.direction = direction
-        self.canBeCalled = False
-        self.times = 0
+        self._canBeCalled = False
+        self._times = 0
 
         if name in groupsNames:
             warn("Unable to put two different groups with same name", Warning, 3)
@@ -114,7 +114,7 @@ class Group():
         groupsNames.append(name)
 
     def __enter__(self):
-        self.canBeCalled = True
+        self._canBeCalled = True
         code.append(f"subgraph {self._id}")
 
         directions = ["TB", "BT", "LR", "RL"]
@@ -123,19 +123,19 @@ class Group():
         return self
 
     def __exit__(self, *_):
-        self.canBeCalled = False
+        self._canBeCalled = False
         # if it's empty
 
         code.append("end")
-        if self.times == 0:
+        if self._times == 0:
             warn("User added empty group or forget to use Group().add()", Warning, 3)
             while code[-1][0:8] != "subgraph":
                 code.pop(-1)
             code.pop(-1)
 
     def add(self, arg):
-        self.times += 1
-        if not self.canBeCalled:
+        self._times += 1
+        if not self._canBeCalled:
             warn("Links or nodes can be added only inside the group", Warning, 2)
             exit()
         if self._id in code[-1]:
@@ -143,7 +143,7 @@ class Group():
             exit()
 
 
-class Node():
+class Node:
     def __init__(self, text: str = "", shape: int = 0, style: NodeStyle = "", customId: str = ""):
         self.text = text
         self.shape = shape
@@ -203,7 +203,7 @@ class Node():
         return str(nodesId)
 
 
-class Arrow():
+class Arrow:
     def __init__(self, text: str = "", type: int = 0, length: int = 1, backArrow: bool = False):
         self.text = text
         self.type = type

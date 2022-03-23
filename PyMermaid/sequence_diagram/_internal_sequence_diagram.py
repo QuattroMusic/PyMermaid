@@ -1,8 +1,7 @@
-#import
-from typing import Union, List, Tuple
+# import
 from warnings import warn
 
-#costants
+# costants
 participantType_participant = 0
 participantType_actor = 1
 
@@ -15,14 +14,15 @@ arrowType_dottedArrow = 5
 arrowType_dottedCross = 6
 arrowType_dottedOpen = 7
 
-#variables
+# variables
 participantNames = []
 
-#code
+# code
 code = []
 
-class Participant():
-    def __init__(self,name:str, type: int = 0, customId: str = ""):
+
+class Participant:
+    def __init__(self, name: str, type: int = 0, customId: str = ""):
         self.name = name
         self.type = type
         self.customId = customId
@@ -39,7 +39,7 @@ class Participant():
             self.customId = self.name
 
         if self.name in participantNames:
-            warn("Unable to put two partecipants with the same name",Warning,4)
+            warn("Unable to put two partecipants with the same name", Warning, 4)
             exit()
 
         participantNames.append(self.name)
@@ -49,13 +49,15 @@ class Participant():
         elif self.type == 1:
             code.append(f"actor {self.name}{obj1}")
         else:
-            warn("Type parameter must be 0 or 1",Warning,3)
+            warn("Type parameter must be 0 or 1", Warning, 3)
             exit()
 
-def link(a: Participant, b: Participant, sentence: str = "",arrow_type: int = 1) -> None:
-    arrows = ["->","->>","-x","-)","-->","-->>","--x","--)"]
+
+def link(a: Participant, b: Participant, sentence: str = "", arrow_type: int = 1) -> None:
+    arrows = ["->", "->>", "-x", "-)", "-->", "-->>", "--x", "--)"]
 
     code.append(f"{a.customId}{arrows[arrow_type]}{b.customId}: {sentence}")
+
 
 def evaluate() -> str:
     global code
@@ -66,9 +68,8 @@ def evaluate() -> str:
     spacing = 4
 
     for i in code:
-        final += ' '*spacing + i + "\n"
+        final += ' ' * spacing + i + "\n"
 
     final += "```"
 
     return final
-

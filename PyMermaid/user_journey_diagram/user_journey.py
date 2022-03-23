@@ -6,31 +6,35 @@ from typing import Union as _Union
 from typing import List as _List
 from typing import Tuple as _Tuple
 
+
 # +---------------+
 # | add functions |  ->  returns an object
 # +---------------+
-def add_user(name:str):
+def add_user(name: str) -> _internal.User:
     """
     Undocumented
     """
     return _internal.User(name=name)
 
-def add_section(name:str):
+
+def add_section(name: str) -> _internal.Section:
     """
     Undocumented
     """
     return _internal.Section(name=name)
 
-def add_action(name: str,amount: int,users: _Union[_internal.User,_List[_internal.User],_Tuple[_internal.User,...]]):
+
+def add_action(name: str, amount: int, users: _Union[_internal.User, _List[_internal.User], _Tuple[_internal.User, ...]]) -> None:
     """
     Undocumented
     """
-    return _internal.add_action(name=name,amount=amount,users=users)
+    return _internal.add_action(name=name, amount=amount, users=users)
+
 
 # +-------------------+
 # | general functions |
 # +-------------------+
-def evaluate():
+def evaluate() -> str:
     """
     Undocumented
     """
@@ -40,7 +44,7 @@ def evaluate():
 # +---------------+
 # | set functions |
 # +---------------+
-def set_title(title:str):
+def set_title(title: str) -> None:
     """
     Undocumented
     """

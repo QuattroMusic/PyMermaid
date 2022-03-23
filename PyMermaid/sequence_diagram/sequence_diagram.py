@@ -3,10 +3,11 @@
 # +---------+
 import PyMermaid.sequence_diagram._internal_sequence_diagram as _internal
 
+
 # +---------------+
 # | add functions |  ->  returns an object
 # +---------------+
-def add_participant(name:str, type: int = 0, customId: str = "") -> _internal.Participant:
+def add_participant(name: str, type: int = 0, customId: str = "") -> _internal.Participant:
     """
     ==========
 
@@ -58,12 +59,13 @@ def add_participant(name:str, type: int = 0, customId: str = "") -> _internal.Pa
 
     ==========
     """
-    return _internal.Participant(name=name,type=type,customId=customId)
+    return _internal.Participant(name=name, type=type, customId=customId)
+
 
 # +-------------------+
 # | general functions |
 # +-------------------+
-def link(a: _internal.Participant, b: _internal.Participant, sentence: str = "",arrow_type: int = 1) -> None:
+def link(a: _internal.Participant, b: _internal.Participant, sentence: str = "", arrow_type: int = 1) -> None:
     """
     ==========
 
@@ -107,7 +109,8 @@ def link(a: _internal.Participant, b: _internal.Participant, sentence: str = "",
 
     ==========
     """
-    return _internal.link(a=a,b=b,sentence=sentence,arrow_type=arrow_type)
+    return _internal.link(a=a, b=b, sentence=sentence, arrow_type=arrow_type)
+
 
 def evaluate() -> str:
     """
@@ -142,6 +145,7 @@ def evaluate() -> str:
     ==========
     """
     return _internal.evaluate()
+
 
 # +-----------+
 # | constants |  ->  used instead of numbers inside functions
