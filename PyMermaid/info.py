@@ -1,4 +1,4 @@
-version="0.1.1"
+version="0.1.2"
 
 author="Quattro"
 myGithub="https://github.com/QuattroMusic"
@@ -23,4 +23,9 @@ Version 0.1.1
     + Added his documentation
     + Reformatted flowchart code
     + Added info file
+
+Version 0.1.2
+    + Added the pie charts
+        > Elements
+        > Title
 """
