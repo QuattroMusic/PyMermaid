@@ -1,4 +1,5 @@
 #imports
+from typing import Union,List,Tuple
 
 #costants
 visibility_public = 1
@@ -15,6 +16,9 @@ code = []
 
 class Class:
     def __init__(self,name):
+
+        name = name.replace("<", "~").replace(">", "~")
+
         self.name = name
         self._times = 0
 
@@ -37,12 +41,26 @@ class Class:
 
         types = ["","+","-","#","~"]
         classifiers = ["", "$"]
+        var = var.replace("<","~").replace(">","~")
 
-        code.append(f"{types[visibility]}{var}{classifiers[classifier]}")
+        code.append(f"{types[visibility]} {var}{classifiers[classifier]}")
 
-    def add_method(self,function: str,visibility:int = 0,classifier:int = 0):
+    def add_method(self,function: str,visibility:int = 0,classifier:int = 0,arguments: Union[str,List[str],Tuple[str,...]] = "",returns: Union[str,List[str],Tuple[str,...]] = ""):
         self._times += 1
         types = ["", "+", "-", "#", "~"]
         classifiers = ["", "$","*"]
+        if type(arguments) is tuple or type(arguments) is list:
+            arguments = ", ".join(arguments)
+        arguments = arguments.replace("<","~").replace(">","~")
 
-        code.append(f"{types[visibility]}{function}(){classifiers[classifier]}")
+        if type(returns) is tuple or type(returns) is list:
+            returns = ", ".join(returns)
+        returns = returns.replace("<","~").replace(">","~")
+
+        code.append(f"{types[visibility]}{function}({arguments}){classifiers[classifier]} :{returns}")
+
+def link(a,b):
+    ...
+
+def evaluate():
+    return "\n".join(code)
