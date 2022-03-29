@@ -3,20 +3,8 @@ from typing import List, Union
 code: List[str] = []
 nodes_created: List["State"] = []
 
-# state object used by state diagrams
-class State:
-    def __init__(self, name: str, description: str = None):
-        self.name = name
-        self.description = description
-        nodes_created.append(self)
-    
-    def get_name(self):
-        return self.name
-    
-    def get_description(self):
-        return self.description
 
-def link_from_start(state: Union[State, str]):
+def link_from_start(state: Union["State", str]):
     if isinstance(state, State):
         code.append(f"[*] --> {state.get_name()}")
     elif isinstance(state, str):
@@ -24,7 +12,7 @@ def link_from_start(state: Union[State, str]):
     else:
         raise TypeError("Input type must be str or Union")
 
-def link_to_end(state: Union[State, str]):
+def link_to_end(state: Union["State", str]):
     if isinstance(state, State):
         code.append(f"{state.get_name()} --> [*]")
     elif isinstance(state, str):
@@ -32,7 +20,7 @@ def link_to_end(state: Union[State, str]):
     else:
         raise TypeError("Input type must be str or Union")
 
-def link(stateFrom: Union[State, str], stateTo: Union[State, str], text: str = None):
+def link(stateFrom: Union["State", str], stateTo: Union["State", str], text: str = None):
     if not isinstance(stateFrom, State) and not isinstance(stateFrom, str):
         raise TypeError("stateFrom type must be str or Union")
     if not isinstance(stateTo, State) and not isinstance(stateFrom, str):
@@ -43,6 +31,41 @@ def link(stateFrom: Union[State, str], stateTo: Union[State, str], text: str = N
     to_name   = stateTo.get_name()   if isinstance(stateTo, State)   else stateTo
     code.append(f"{from_name} --> {to_name}{extra}")
 
+# state object used by state diagrams
+class State:
+    def __init__(self, name: str, description: str = None):
+        self.name = name
+        self.description = description
+        self._canBeCalled = False
+        nodes_created.append(self)
+    
+    def get_name(self):
+        return self.name
+    
+    def get_description(self):
+        return self.description
+    
+    def __enter__(self):
+        self._canBeCalled = True
+        code.append("state " + self.get_name() + " {")
+        return self
+    
+    def __exit__(self, *args, **kwargs):
+        self._canBeCalled = False
+        code.append("}")
+
+    def link_from_start(self, state: Union["State", str]):
+        if self._canBeCalled:
+            link_from_start(state)
+    
+    def link_to_end(self, state: Union["State", str]):
+        if self._canBeCalled:
+            link_to_end(state)
+    
+    def link(self, stateFrom: Union["State", str], stateTo: Union["State", str], text: str = None):
+        if self._canBeCalled:
+            link(stateFrom, stateTo, text)
+    
 def evaluate() -> str:
     output = "stateDiagram-v2\n"
     indent_level = 1
@@ -54,19 +77,28 @@ def evaluate() -> str:
     
     # create whole document
     for line in code:
-        if "{" in line: indent_level += 1
         if "}" in line: indent_level -= 1
         
         output += " " * (indent_level * 4) + f"{line}\n"
+        
+        if "{" in line: indent_level += 1
     
     return output
 
 if __name__ == "__main__":
-    n1 = State("Test", "This is a test description")
-    n2 = State("Second", "Second description")
-    link_from_start(n1)
-    link_from_start("Prova")
-    link("Prova", n2)
-    link(n1, n2, "This is a transition")
-    link_to_end(n2)
+    
+    with State("First") as first:    
+        with State("Second") as second:
+            with State("Third") as third:
+                t = State("third")
+                link_from_start(t)
+                link_to_end(t)
+            
+            s = State("second")
+            second.link_from_start(s)
+            second.link(s, third)
+        
+        first.link_from_start(second)
+        
+    link_from_start(first)
     print(evaluate())
