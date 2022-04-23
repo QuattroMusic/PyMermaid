@@ -6,7 +6,7 @@ nodes_created: List["State"] = []
 
 def link_from_start(state: Union["State", str]):
     if isinstance(state, State):
-        code.append(f"[*] --> {state.get_name()}")
+        code.append(f"[*] --> {state.name}")
     elif isinstance(state, str):
         code.append(f"[*] --> {state}")
     else:
@@ -14,7 +14,7 @@ def link_from_start(state: Union["State", str]):
 
 def link_to_end(state: Union["State", str]):
     if isinstance(state, State):
-        code.append(f"{state.get_name()} --> [*]")
+        code.append(f"{state.name} --> [*]")
     elif isinstance(state, str):
         code.append(f"{state} --> [*]")
     else:
@@ -27,8 +27,8 @@ def link(stateFrom: Union["State", str], stateTo: Union["State", str], text: str
         raise TypeError("stateTo type must be str or Union")
     
     extra = f": {text}" if text else ""
-    from_name = stateFrom.get_name() if isinstance(stateFrom, State) else stateFrom
-    to_name   = stateTo.get_name()   if isinstance(stateTo, State)   else stateTo
+    from_name = stateFrom.name if isinstance(stateFrom, State) else stateFrom
+    to_name   = stateTo.name   if isinstance(stateTo, State)   else stateTo
     code.append(f"{from_name} --> {to_name}{extra}")
 
 # state object used by state diagrams
@@ -39,15 +39,9 @@ class State:
         self._canBeCalled = False
         nodes_created.append(self)
     
-    def get_name(self):
-        return self.name
-    
-    def get_description(self):
-        return self.description
-    
     def __enter__(self):
         self._canBeCalled = True
-        code.append("state " + self.get_name() + " {")
+        code.append("state " + self.name + " {")
         return self
     
     def __exit__(self, *args, **kwargs):
@@ -73,7 +67,7 @@ def evaluate() -> str:
     # setup all nodes with descriptions
     for node in nodes_created:
         if node.description:
-            output += " " * (indent_level * 4) + f"state \"{node.get_description()}\" as {node.get_name()}\n"
+            output += " " * (indent_level * 4) + f"state \"{node.description}\" as {node.name}\n"
     
     # create whole document
     for line in code:
