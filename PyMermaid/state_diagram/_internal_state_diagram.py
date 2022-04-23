@@ -84,3 +84,18 @@ def evaluate() -> str:
         if "{" in line: indent_level += 1
     
     return output
+
+if __name__ == "__main__":
+    s1 = State("still")
+    s2 = State("moving")
+    s3 = State("crash")
+    
+    link_from_start(s1)
+    link_to_end(s1)
+    link_to_end(s3)
+    
+    link(s1, s2)
+    link(s2, s3)
+    link(s2, s1)
+    
+    print(evaluate())
