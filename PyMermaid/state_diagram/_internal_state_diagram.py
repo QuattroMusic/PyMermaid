@@ -84,21 +84,3 @@ def evaluate() -> str:
         if "{" in line: indent_level += 1
     
     return output
-
-if __name__ == "__main__":
-    
-    with State("First") as first:    
-        with State("Second") as second:
-            with State("Third") as third:
-                t = State("third")
-                link_from_start(t)
-                link_to_end(t)
-            
-            s = State("second")
-            second.link_from_start(s)
-            second.link(s, third)
-        
-        first.link_from_start(second)
-        
-    link_from_start(first)
-    print(evaluate())
