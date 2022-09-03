@@ -1,7 +1,7 @@
-#useless folders
-**/.idea/
-**/.vscode/
-testMermaid.py
+# User defined folders
+.idea/
+.vscode/
+testMermaid
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
