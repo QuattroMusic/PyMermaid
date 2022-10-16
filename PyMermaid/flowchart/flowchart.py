@@ -79,32 +79,32 @@ def set_layout(direction: _int.Layout) -> None:
 
 
 class NodeShapes(_Enum):
-    default            = _int.NodeShapes.default
-    round_edges        = _int.NodeShapes.round_edges
-    stadium            = _int.NodeShapes.stadium
-    subroutine         = _int.NodeShapes.subroutine
-    cylindrical        = _int.NodeShapes.cylindrical
-    circle             = _int.NodeShapes.circle
-    asymmetric         = _int.NodeShapes.asymmetric
-    rhombus            = _int.NodeShapes.rhombus
-    hexagon            = _int.NodeShapes.hexagon
-    parallelogram      = _int.NodeShapes.parallelogram
-    parallelogram_alt  = _int.NodeShapes.parallelogram_alt
-    trapezoid          = _int.NodeShapes.trapezoid
-    trapezoid_alt      = _int.NodeShapes.trapezoid_alt
+    default            = _int.NodeShapes.default.value
+    round_edges        = _int.NodeShapes.round_edges.value
+    stadium            = _int.NodeShapes.stadium.value
+    subroutine         = _int.NodeShapes.subroutine.value
+    cylindrical        = _int.NodeShapes.cylindrical.value
+    circle             = _int.NodeShapes.circle.value
+    asymmetric         = _int.NodeShapes.asymmetric.value
+    rhombus            = _int.NodeShapes.rhombus.value
+    hexagon            = _int.NodeShapes.hexagon.value
+    parallelogram      = _int.NodeShapes.parallelogram.value
+    parallelogram_alt  = _int.NodeShapes.parallelogram_alt.value
+    trapezoid          = _int.NodeShapes.trapezoid.value
+    trapezoid_alt      = _int.NodeShapes.trapezoid_alt.value
 
 
 class Layout(_Enum):
-    top_to_bottom = _int.Layout.top_to_bottom
-    bottom_to_top = _int.Layout.bottom_to_top
-    left_to_right = _int.Layout.left_to_right
-    right_to_left = _int.Layout.right_to_left
+    top_to_bottom = _int.Layout.top_to_bottom.value
+    bottom_to_top = _int.Layout.bottom_to_top.value
+    left_to_right = _int.Layout.left_to_right.value
+    right_to_left = _int.Layout.right_to_left.value
 
 
 class ArrowType(_Enum):
-    normal        = _int.ArrowType.normal
-    normal_arrow  = _int.ArrowType.normal_arrow
-    thick         = _int.ArrowType.thick
-    thick_arrow   = _int.ArrowType.thick_arrow
-    dotted        = _int.ArrowType.dotted
-    dotted_arrow  = _int.ArrowType.dotted_arrow
+    normal        = _int.ArrowType.normal.value
+    normal_arrow  = _int.ArrowType.normal_arrow.value
+    thick         = _int.ArrowType.thick.value
+    thick_arrow   = _int.ArrowType.thick_arrow.value
+    dotted        = _int.ArrowType.dotted.value
+    dotted_arrow  = _int.ArrowType.dotted_arrow.value

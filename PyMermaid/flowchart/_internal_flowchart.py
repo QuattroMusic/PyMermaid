@@ -165,7 +165,7 @@ def link(from_: Union[Union['Node', Group], List[Union['Node', Group]], Tuple[Un
         arrow = Arrow()
 
     if type(from_) is list or type(from_) is tuple:
-        from_ = " & ".join(map(str, [i.id for i in from_]))
+        from_ = " & ".join(map(str, [i._id for i in from_]))
     else:
         from_ = str(from_._id)
 
