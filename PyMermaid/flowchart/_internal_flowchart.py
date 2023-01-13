@@ -16,9 +16,10 @@ class NodeShapes(Enum):
     rhombus = ("{", "}")
     hexagon = ("{{", "}}")
     parallelogram = ("[/", "/]")
-    parallelogram_alt = ("\\", "\\")
-    trapezoid = ("/", "\\")
-    trapezoid_alt = ("\\", "/")
+    parallelogram_alt = ("[\\", "\\]")
+    trapezoid = ("[/", "\\]")
+    trapezoid_alt = ("[\\", "/]")
+    double_circle = ("(((", ")))")
 
 
 class Layout(Enum):
@@ -207,6 +208,7 @@ def evaluate() -> str:
 
 def clear():
     global nodes_id, links_id, flowchart_layout
+    # resets the code for generating a new one
     nodes_id = -1
     links_id = -1
     flowchart_layout = "TB"
