@@ -69,6 +69,15 @@ def evaluate() -> str:
     return _int.evaluate()
 
 
+def clear() -> None:
+    """
+    Clear the last result
+    
+    TODO
+    """
+    return _int.clear()
+
+
 def set_layout(direction: _int.Layout) -> None:
     """
     Set the graph direction
