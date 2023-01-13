@@ -64,7 +64,6 @@ class NodeStyle:
 
         code.append(self)
 
-
 class LinkStyle:
     def __init__(self, line_color: str = "#d3d3d3", line_width: int = 2, text_color: str = "", dashed_line_lengths: Union[List[int], Tuple[int, int]] = ()):
         self.line_color: str = line_color
@@ -73,7 +72,6 @@ class LinkStyle:
         self.dashed_line_lengths: tuple[str] = tuple(map(str, dashed_line_lengths))
 
         code.append(self)
-
 
 class Group:
     def __init__(self, text: str, direction: Layout = Layout.top_to_bottom):
@@ -92,7 +90,6 @@ class Group:
         link(self, other)
         return other
 
-
 class Node:
     def __init__(self, text: str = "", shape: NodeShapes = NodeShapes.default, style: NodeStyle = None):
         self.text = text
@@ -107,7 +104,6 @@ class Node:
         # with the return, you can do `Node1 >> Node2 >> Node3`
         return other
 
-
 class Arrow:
     def __init__(self, text: str = "", type_: ArrowType = ArrowType.normal_arrow, length: int = 1, backArrow: bool = False):
         self.text = text
@@ -115,45 +111,49 @@ class Arrow:
         self.length = length
         self.backArrow = backArrow
 
+def add_node_style(item: NodeStyle, spacing: int = 0):
+    args = []
+    if item.fill != "":
+        args.append(f"fill:{item.fill}")
+    if item.border_color != "":
+        args.append(f"stroke:{item.border_color}")
+    if item.border_width != 1:
+        args.append(f"stroke-width:{item.border_width}px")
+    if item.text_color != "":
+        args.append(f"color:{item.text_color}")
+    if len(item.dashed_border_lengths) != 0:
+        args.append(f"stroke-dasharray: {item.dashed_border_lengths[0]} {item.dashed_border_lengths[1]}")
 
-def _get(item: NodeStyle | LinkStyle | Group | Node | Arrow, spacing: int = 0) -> str:
-    if type(item) == NodeStyle:
-        args = []
-        if item.fill != "":
-            args.append(f"fill:{item.fill}")
-        if item.border_color != "":
-            args.append(f"stroke:{item.border_color}")
-        if item.border_width != 1:
-            args.append(f"stroke-width:{item.border_width}px")
-        if item.text_color != "":
-            args.append(f"color:{item.text_color}")
-        if len(item.dashed_border_lengths) != 0:
-            args.append(f"stroke-dasharray: {item.dashed_border_lengths[0]} {item.dashed_border_lengths[1]}")
+    return f"{spacing * ' '} classDef {item.name} {','.join(args)}\n"
 
-        return f"{spacing * ' '} classDef {item.name} {','.join(args)}\n"
-    elif type(item) == LinkStyle:
-        args = []
+def add_link_style(item: LinkStyle):
+    args = []
 
-        if item.line_color != "":
-            args.append(f"stroke:{item.line_color}")
-        if item.line_width != 2:
-            args.append(f"stroke-width:{item.line_width}")
-        if item.text_color != "":
-            args.append(f"color:{item.text_color}px")
-        if len(item.dashed_line_lengths) != 0:
-            args.append(f"stroke-dasharray:{item.dashed_line_lengths[0]} {item.dashed_line_lengths[1]}")
+    if item.line_color != "":
+        args.append(f"stroke:{item.line_color}")
+    if item.line_width != 2:
+        args.append(f"stroke-width:{item.line_width}")
+    if item.text_color != "":
+        args.append(f"color:{item.text_color}px")
+    if len(item.dashed_line_lengths) != 0:
+        args.append(f"stroke-dasharray:{item.dashed_line_lengths[0]} {item.dashed_line_lengths[1]}")
 
-        code.append(f'linkStyle {links_id} ' + ','.join(args))
-    elif type(item) == Group:
-        return f'{spacing * " "}subgraph {item._id}["{item.text}"]\n{(spacing + 4) * " "}direction {item.direction}\n'
-    elif type(item) == Node:
-        if item.style is not None:
-            return f'{spacing * " "}{item._id}{item.shape.value[0]}"{item.text}"{item.shape.value[1]}:::{item.style.name}\n'
-        return f'{spacing * " "}{item._id}{item.shape.value[0]}"{item.text}"{item.shape.value[1]}\n'
-    elif type(item) == Arrow:
-        text = f'|"{item.text}"|' if item.text != "" else ""
-        back = "<" if item.backArrow is True else ""
-        return item.type.value(back, item.length, text)
+    code.append(f'linkStyle {links_id} ' + ','.join(args))
+
+def add_group(item: Group, spacing: int = 0):
+    return f'{spacing * " "}subgraph {item._id}["{item.text}"]\n{(spacing + 4) * " "}direction {item.direction}\n'
+
+def add_node(item: Group, spacing: int = 0):
+    if item.style is not None:
+        return f'{spacing * " "}{item._id}{item.shape.value[0]}"{item.text}"{item.shape.value[1]}:::{item.style.name}\n'
+    elif item.text == "":
+        return f'{spacing * " "}{item._id}{item.shape.value[0]}" "{item.shape.value[1]}\n'
+    return f'{spacing * " "}{item._id}{item.shape.value[0]}"{item.text}"{item.shape.value[1]}\n'
+
+def add_arrow(item: Arrow):
+    text = f'|"{item.text}"|' if item.text != "" else ""
+    back = "<" if item.backArrow is True else ""
+    return item.type.value(back, item.length, text)
 
 
 def link(from_: Union[Union['Node', Group], List[Union['Node', Group]], Tuple[Union['Node', Group], ...]], to_: Union[Union['Node', Group], List[Union['Node', Group]], Tuple[Union['Node', Group], ...]], arrow: Arrow = None, style: LinkStyle = None):
@@ -173,10 +173,10 @@ def link(from_: Union[Union['Node', Group], List[Union['Node', Group]], Tuple[Un
     else:
         to_ = str(to_._id)
 
-    code.append(f"{from_} {_get(arrow)} {to_}")
+    code.append(f"{from_} {add_arrow(arrow)} {to_}")
 
     if style is not None:
-        _get(style)
+        add_link_style(style)
 
 
 def evaluate() -> str:
@@ -185,7 +185,7 @@ def evaluate() -> str:
 
     for item in code:
         if type(item) == Group:
-            res += _get(item, spacing)
+            res += add_group(item, spacing)
             spacing += 4
 
         elif type(item) == str and item == "__exit__":
@@ -193,18 +193,16 @@ def evaluate() -> str:
             res += f"{spacing * ' '}end\n"
 
         elif type(item) == Node:
-            res += _get(item, spacing)
+            res += add_node(item, spacing)
 
         elif type(item) == NodeStyle:
-            res += _get(item, spacing)
+            res += add_node_style(item, spacing)
 
         elif type(item) == str:
             # links and link styles
             res += f"{spacing * ' '}{item}\n"
 
-    res += "```"
-
-    return res
+    return res + "```"
 
 def clear():
     global nodes_id, links_id, flowchart_layout
