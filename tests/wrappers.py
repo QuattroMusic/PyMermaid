@@ -4,13 +4,14 @@ from time import time
 tests_info: list[int, int, int] = [0, 0, 0]
 
 
-def test_it(func):
+def test_this(func):
     """
     Wrapping function that returns the execution time of a function
     """
     start = time()
     result = func()  # for the tests we're not going to use args and kwargs
     end = time()
+    failed = False
 
     # check if the result is the same as the expected
     if result[0] == result[1]:
@@ -19,8 +20,14 @@ def test_it(func):
     else:
         tests_info[2] += 1
         res = "test passed unsuccessfully"
+        failed = True
     
-    print(f"Executed {func.__name__} in {end - start}s, {res}")
+    print(f"Executed {func.__name__} in {round(end - start, 4)}s, {res}")
+
+    if failed:
+        # print if we failed the test
+        print(repr(result[0]))
+        print(repr(result[1]))
     
     tests_info[0] += end - start
 
