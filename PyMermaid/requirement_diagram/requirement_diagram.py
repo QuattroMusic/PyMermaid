@@ -1,51 +1,63 @@
-import PyMermaid.requirement_diagram._internal_requirement_diagram as _internal
+import PyMermaid.requirement_diagram._internal_requirement_diagram as _int
 from enum import Enum
 from typing import Union
 
 
-def add_requirement(name: str, type: 'Types', id: str = None, text: str = None, risk: 'Risk' = None, verification_method: 'VerificationMethod' = None) -> _internal.Requirement:
-    return _internal.Requirement(name=name, type=type, id=id, text=text, risk=risk, verification_method=verification_method)
+def add_requirement(name: str, type: _int.Types, id: str = None, text: str = None, risk: _int.Risk = None, verification_method: _int.VerificationMethod = None) -> _int.Requirement:
+    """
+    TODO
+    """
+    return _int.Requirement(name=name, type=type, id=id, text=text, risk=risk, verification_method=verification_method)
 
 
-def add_element(name, type: str = None, doc_ref: str = None) -> _internal.Element:
-    return _internal.Element(name=name, type=type, doc_ref=doc_ref)
+def add_element(name, type: str = None, doc_ref: str = None) -> _int.Element:
+    """
+    TODO
+    """
+    return _int.Element(name=name, type=type, doc_ref=doc_ref)
 
 
-def add_relationship(a: Union[_internal.Requirement, _internal.Element], b: Union[_internal.Requirement, _internal.Element], type: 'Relationship') -> None:
-    return _internal.relationship(a=a, b=b, type=type)
+def add_relationship(a: _int.Requirement | _int.Element, b: _int.Requirement | _int.Element, type: _int.Relationship) -> None:
+    """
+    TODO
+    """
+    return _int.relationship(a=a, b=b, type=type)
 
 
 def evaluate() -> str:
-    return _internal.evaluate()
+    """
+    TODO
+    """
+    return _int.evaluate()
 
 
 class Types(Enum):
-    requirement = _internal.Types.requirement
-    functionalRequirement = _internal.Types.functionalRequirement
-    interfaceRequirement = _internal.Types.interfaceRequirement
-    performanceRequirement = _internal.Types.performanceRequirement
-    physicalRequirement = _internal.Types.physicalRequirement
-    designConstraint = _internal.Types.designConstraint
+    requirement             = _int.Types.requirement.value
+    functionalRequirement   = _int.Types.functionalRequirement.value
+    interfaceRequirement    = _int.Types.interfaceRequirement.value
+    performanceRequirement  = _int.Types.performanceRequirement.value
+    physicalRequirement     = _int.Types.physicalRequirement.value
+    designConstraint        = _int.Types.designConstraint.value
 
 
 class Risk(Enum):
-    low = _internal.Risk.low
-    medium = _internal.Risk.medium
-    high = _internal.Risk.high
+    low     = _int.Risk.low.value
+    medium  = _int.Risk.medium.value
+    high    = _int.Risk.high.value
 
 
 class VerificationMethod(Enum):
-    analysis = _internal.VerificationMethod.analysis
-    inspection = _internal.VerificationMethod.inspection
-    test = _internal.VerificationMethod.test
-    demonstration = _internal.VerificationMethod.demonstration
+    analysis       = _int.VerificationMethod.analysis.value
+    inspection     = _int.VerificationMethod.inspection.value
+    test           = _int.VerificationMethod.test.value
+    demonstration  = _int.VerificationMethod.demonstration.value
 
 
 class Relationship(Enum):
-    contains = _internal.Relationship.contains
-    copies = _internal.Relationship.copies
-    derives = _internal.Relationship.derives
-    satisfies = _internal.Relationship.satisfies
-    verifies = _internal.Relationship.verifies
-    refines = _internal.Relationship.refines
-    traces = _internal.Relationship.traces
+    contains   = _int.Relationship.contains.value
+    copies     = _int.Relationship.copies.value
+    derives    = _int.Relationship.derives.value
+    satisfies  = _int.Relationship.satisfies.value
+    verifies   = _int.Relationship.verifies.value
+    refines    = _int.Relationship.refines.value
+    traces     = _int.Relationship.traces.value
