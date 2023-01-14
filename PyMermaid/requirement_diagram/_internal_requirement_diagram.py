@@ -56,8 +56,8 @@ class Element:
         code.append(self)
 
 
-def relationship(a: Requirement | Element, b: Requirement | Element, type: Relationship):
-    code.append(f"{a.name} - {type.value} -> {b.name}")
+def relationship(from_: Requirement | Element, to_: Requirement | Element, type: Relationship):
+    code.append(f"{from_.name} - {type.value} -> {to_.name}")
 
 
 def get_requirement(item: Requirement) -> str:
@@ -87,7 +87,7 @@ def get_element(item: Element) -> str:
 
 
 def evaluate():
-    final = "```mermaid\nrequirementDiagram\n\n"
+    final = "```mermaid\nrequirementDiagram\n"
 
     for item in code:
         if type(item) == Requirement:
@@ -99,3 +99,6 @@ def evaluate():
             final += '    ' + item + "\n"
 
     return final + "```"
+
+def clear():
+    code.clear()

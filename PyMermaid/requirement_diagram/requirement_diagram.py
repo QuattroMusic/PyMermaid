@@ -1,34 +1,36 @@
 import PyMermaid.requirement_diagram._internal_requirement_diagram as _int
 from enum import Enum
-from typing import Union
 
 
-def add_requirement(name: str, type: _int.Types, id: str = None, text: str = None, risk: _int.Risk = None, verification_method: _int.VerificationMethod = None) -> _int.Requirement:
+def add_requirement(name: str, type: _int.Types = _int.Types.requirement, id: str = None, text: str = None, risk: _int.Risk = None, verification_method: _int.VerificationMethod = None) -> _int.Requirement:
     """
     TODO
     """
     return _int.Requirement(name=name, type=type, id=id, text=text, risk=risk, verification_method=verification_method)
 
-
-def add_element(name, type: str = None, doc_ref: str = None) -> _int.Element:
+def add_element(name: str, type: str = None, doc_ref: str = None) -> _int.Element:
     """
     TODO
     """
     return _int.Element(name=name, type=type, doc_ref=doc_ref)
 
-
-def add_relationship(a: _int.Requirement | _int.Element, b: _int.Requirement | _int.Element, type: _int.Relationship) -> None:
+def add_relationship(from_: _int.Requirement | _int.Element, to_: _int.Requirement | _int.Element, type: _int.Relationship) -> None:
     """
     TODO
     """
-    return _int.relationship(a=a, b=b, type=type)
-
+    return _int.relationship(from_=from_, to_=to_, type=type)
 
 def evaluate() -> str:
     """
     TODO
     """
     return _int.evaluate()
+
+def clear() -> None:
+    """
+    TODO
+    """
+    return _int.clear()
 
 
 class Types(Enum):
