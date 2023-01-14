@@ -35,4 +35,9 @@ def test_this(func):
 def evaluate_general():
     print()
     print(f"Tests passed: {tests_info[1]} / {tests_info[1] + tests_info[2]}")
-    print(f"Tests executed in {tests_info[0]}s")
+    print(f"Tests executed in {round(tests_info[0], 6)}s\n")
+
+
+def clear_info():
+    global tests_info
+    tests_info = [0, 0, 0]

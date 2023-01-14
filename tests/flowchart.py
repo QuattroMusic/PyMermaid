@@ -26,7 +26,7 @@ flowchart TB
 #############################
 
 @test_this
-def basic_flowchart():
+def basic():
     f.clear()
     n1 = f.add_node("Test1")
     n2 = f.add_node("Test2")
