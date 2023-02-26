@@ -1,66 +1,62 @@
 #imports
 from typing import Union,List,Tuple
+from enum import Enum
 
 #costants
-visibility_public = 1
-visibility_private = 2
-visibility_protected = 3
-visibility_packageInternal = 4
-classifier_static = 1
-classifier_abstract = 2
+class Visibility(Enum):
+    NONE = 0
+    PUBLIC = 1
+    PRIVATE = 2
+    PROTECTED = 3
+    PACKAGE_INTERNAL = 4
+
+class FieldClassifier(Enum):
+    NONE = 0
+    STATIC = 1
+
+class MethodClassifier(Enum):
+    NONE = 0
+    STATIC = 1
+    ABSTRACT = 2
+
 
 #variables
 
 #code
-code = []
+code = ["classDiagram"]
+identation_level = 0
 
 class Class:
-    def __init__(self,name):
-
+    def __init__(self, name: str):
         name = name.replace("<", "~").replace(">", "~")
-
         self.name = name
-        self._times = 0
-
         code.append(f"class {self.name}")
 
-    def __enter__(self):
-        #if created using the with, add the { symbol
-        code[-1] += "{"
-        return self
-
-    def __exit__(self, *args):
-        code.append("}")
-        if self._times == 0:
-            for i in range(2):
-                code.pop(-1)
-            code.append(f"class {self.name}")
-
-    def add_field(self,var: str, visibility: int = 0,classifier:int = 0):
-        self._times += 1
-
-        types = ["","+","-","#","~"]
+    def add_field(self, name: str, field_type: str, visibility: Visibility = Visibility.NONE, classifier: FieldClassifier = FieldClassifier.NONE):
+        types = ["", "+","-","#","~"]
         classifiers = ["", "$"]
-        var = var.replace("<","~").replace(">","~")
+        field_type = field_type.replace("<","~").replace(">","~")
+        
+        code.append(f"{self.name} : {types[visibility.value]}{field_type} {name}{classifiers[classifier.value]}")
 
-        code.append(f"{types[visibility]} {var}{classifiers[classifier]}")
-
-    def add_method(self,function: str,visibility:int = 0,classifier:int = 0,arguments: Union[str,List[str],Tuple[str,...]] = "",returns: Union[str,List[str],Tuple[str,...]] = ""):
-        self._times += 1
-        types = ["", "+", "-", "#", "~"]
-        classifiers = ["", "$","*"]
-        if type(arguments) is tuple or type(arguments) is list:
-            arguments = ", ".join(arguments)
-        arguments = arguments.replace("<","~").replace(">","~")
-
-        if type(returns) is tuple or type(returns) is list:
-            returns = ", ".join(returns)
-        returns = returns.replace("<","~").replace(">","~")
-
-        code.append(f"{types[visibility]}{function}({arguments}){classifiers[classifier]} :{returns}")
-
+    def add_method(self, name: str, method_input_types: List[Tuple[str, str]], method_return_type: str = "", visibility: Visibility = Visibility.NONE, classifier: MethodClassifier = MethodClassifier.NONE):
+        types = ["", "+","-","#","~"]
+        classifiers = ["", "$", "*"]
+        return_type = method_return_type.replace("<","~").replace(">","~")
+        input_types = [f"{input_type.replace('<','~').replace('>','~')}{' ' if len(input_type) > 0 else ''}{input_name}" for input_type, input_name in method_input_types]
+        
+        code.append(f"{self.name} : {types[visibility.value]}{return_type}{' ' if len(return_type) > 0 else ''}{name}({', '.join(input_types)}){classifiers[classifier.value]}")
+    
 def link(a,b):
     ...
 
 def evaluate():
     return "\n".join(code)
+
+if __name__ == "__main__":
+    c = Class("Square<Shape>")
+    c.add_field("id", "int")
+    c.add_field("position", "List<int>")
+    c.add_method("setPoints", [("List<int>","points")])
+    c.add_method("getPoints", [("","")], "List<int>")
+    print(evaluate())
