@@ -1,29 +1,13 @@
-# +---------+
-# | imports |
-# +---------+
-import PyMermaid.class_diagram.class_diagram as _internal
+import PyMermaid.internals.class_diagram as _int
 
-# +---------------+
-# | add functions |  ->  returns an object
-# +---------------+
-def add_class(name: str) -> _internal.Class:
+def add_class(name: str) -> _int.Class:
     """
     Undocumented
     """
-    return _internal.Class(name=name)
-
-#def link(a,b):
-#    """
-#    Undocumented
-#    """
-#    return _internal.link(a=a,b=b)
+    return _int.Class(name=name)
 
 def evaluate():
     """
     Undocumented
     """
-    return _internal.evaluate()
-
-# +-----------+
-# | constants |  ->  used instead of numbers inside functions
-# +-----------+
+    return _int.evaluate()

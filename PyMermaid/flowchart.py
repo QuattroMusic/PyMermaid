@@ -101,6 +101,7 @@ class NodeShapes(_Enum):
     parallelogram_alt  = _int.NodeShapes.parallelogram_alt.value
     trapezoid          = _int.NodeShapes.trapezoid.value
     trapezoid_alt      = _int.NodeShapes.trapezoid_alt.value
+    double_circle      = _int.NodeShapes.double_circle.value
 
 class Layout(_Enum):
     top_to_bottom  = _int.Layout.top_to_bottom.value

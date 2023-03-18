@@ -1,49 +1,33 @@
-# +---------+
-# | imports |
-# +---------+
-import PyMermaid.user_journey_diagram.user_journey_diagram as _internal
+import PyMermaid.internals.user_journey_diagram as _int
 from typing import Union as _Union, List as _List, Tuple as _Tuple
 
-
-# +---------------+
-# | add functions |  ->  returns an object
-# +---------------+
-def add_user(name: str) -> _internal.User:
+def add_user(name: str) -> _int.User:
     """
     Undocumented
     """
-    return _internal.User(name=name)
+    return _int.User(name=name)
 
-
-def add_section(name: str) -> _internal.Section:
+def add_section(name: str) -> _int.Section:
     """
     Undocumented
     """
-    return _internal.Section(name=name)
+    return _int.Section(name=name)
 
-
-def add_action(name: str, amount: int, users: _Union[_internal.User, _List[_internal.User], _Tuple[_internal.User, ...]]) -> None:
+def add_action(name: str, amount: int, users: _Union[_int.User, _List[_int.User], _Tuple[_int.User, ...]]) -> None:
     """
     Undocumented
     """
-    return _internal.add_action(name=name, amount=amount, users=users)
+    return _int.add_action(name=name, amount=amount, users=users)
 
 
-# +-------------------+
-# | general functions |
-# +-------------------+
 def evaluate() -> str:
     """
     Undocumented
     """
-    return _internal.evaluate()
+    return _int.evaluate()
 
-
-# +---------------+
-# | set functions |
-# +---------------+
 def set_title(title: str) -> None:
     """
     Undocumented
     """
-    return _internal.set_title(title=title)
+    return _int.set_title(title=title)

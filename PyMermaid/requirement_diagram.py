@@ -1,4 +1,4 @@
-import PyMermaid.requirement_diagram.requirement_diagram as _int
+import PyMermaid.internals.requirement_diagram as _int
 from enum import Enum
 
 
@@ -32,7 +32,6 @@ def clear() -> None:
     """
     return _int.clear()
 
-
 class Types(Enum):
     requirement             = _int.Types.requirement.value
     functionalRequirement   = _int.Types.functionalRequirement.value
@@ -41,19 +40,16 @@ class Types(Enum):
     physicalRequirement     = _int.Types.physicalRequirement.value
     designConstraint        = _int.Types.designConstraint.value
 
-
 class Risk(Enum):
     low     = _int.Risk.low.value
     medium  = _int.Risk.medium.value
     high    = _int.Risk.high.value
-
 
 class VerificationMethod(Enum):
     analysis       = _int.VerificationMethod.analysis.value
     inspection     = _int.VerificationMethod.inspection.value
     test           = _int.VerificationMethod.test.value
     demonstration  = _int.VerificationMethod.demonstration.value
-
 
 class Relationship(Enum):
     contains   = _int.Relationship.contains.value

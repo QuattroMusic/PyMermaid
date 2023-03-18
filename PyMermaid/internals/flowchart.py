@@ -16,9 +16,10 @@ class NodeShapes(Enum):
     rhombus = ("{", "}")
     hexagon = ("{{", "}}")
     parallelogram = ("[/", "/]")
-    parallelogram_alt = ("\\", "\\")
-    trapezoid = ("/", "\\")
-    trapezoid_alt = ("\\", "/")
+    parallelogram_alt = ("[\\", "\\]")
+    trapezoid = ("[/", "\\]")
+    trapezoid_alt = ("[\\", "/]")
+    double_circle = ("(((", ")))")
 
 
 class Layout(Enum):

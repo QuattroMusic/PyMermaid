@@ -1,34 +1,19 @@
-# +---------+
-# | imports |
-# +---------+
-import PyMermaid.pie_chart.pie_chart as _internal
+import PyMermaid.internals.pie_chart as _int
 
-
-# +---------------+
-# | add functions |  ->  returns an object
-# +---------------+
 def add_element(name: str, amount: float):
     """
     Undocumented
     """
-    return _internal.add_element(name=name, amount=amount)
+    return _int.add_element(name=name, amount=amount)
 
-
-# +-------------------+
-# | general functions |
-# +-------------------+
 def evaluate():
     """
     Undocumented
     """
-    return _internal.evaluate()
+    return _int.evaluate()
 
-
-# +---------------+
-# | set functions |
-# +---------------+
 def set_title(title: str):
     """
     Undocumented
     """
-    return _internal.set_title(title=title)
+    return _int.set_title(title=title)
