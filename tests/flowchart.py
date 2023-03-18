@@ -1,5 +1,10 @@
 from wrappers import test_this, evaluate_general
-from PyMermaid.mermaid import flowchart as f
+
+from os import path as os_path
+from sys import path as sys_path
+sys_path.append(os_path.dirname(os_path.dirname(os_path.abspath(__file__))))
+
+import PyMermaid.flowchart as f
 
 
 ############################

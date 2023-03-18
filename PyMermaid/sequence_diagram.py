@@ -1,5 +1,5 @@
-from . import _internal_sequence_diagram as _internal
-from ._internal_sequence_diagram import UserType, ArrowType # used by users importing this file
+import PyMermaid.sequence_diagram.sequence_diagram as _internal
+# from ._internal_sequence_diagram import UserType, ArrowType # used by users importing this file
 
 def add_user(name: str, type: int = 0, customId: str = "") -> _internal.User:
     """

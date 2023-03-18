@@ -1,7 +1,7 @@
 # +---------+
 # | imports |
 # +---------+
-import PyMermaid.class_diagram._internal_class_diagram as _internal
+import PyMermaid.class_diagram.class_diagram as _internal
 
 # +---------------+
 # | add functions |  ->  returns an object

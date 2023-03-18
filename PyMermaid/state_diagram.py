@@ -1,4 +1,4 @@
-import PyMermaid.state_diagram._internal_state_diagram as _internal
+import PyMermaid.state_diagram.state_diagram as _internal
 from typing import Union
 
 def add_state(name: str, description: str = None) -> _internal.State:

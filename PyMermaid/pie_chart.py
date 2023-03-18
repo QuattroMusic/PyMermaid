@@ -1,7 +1,7 @@
 # +---------+
 # | imports |
 # +---------+
-import PyMermaid.pie_chart._internal_pie_chart as _internal
+import PyMermaid.pie_chart.pie_chart as _internal
 
 
 # +---------------+

@@ -1,4 +1,4 @@
-import PyMermaid.requirement_diagram._internal_requirement_diagram as _int
+import PyMermaid.requirement_diagram.requirement_diagram as _int
 from enum import Enum
 
 

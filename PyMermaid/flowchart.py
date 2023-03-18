@@ -1,4 +1,4 @@
-import PyMermaid.flowchart._internal_flowchart as _int
+import PyMermaid.internals.flowchart as _int
 from enum import Enum as _Enum
 from typing import Union as _Union, List as _List, Tuple as _Tuple
 
@@ -101,15 +101,12 @@ class NodeShapes(_Enum):
     parallelogram_alt  = _int.NodeShapes.parallelogram_alt.value
     trapezoid          = _int.NodeShapes.trapezoid.value
     trapezoid_alt      = _int.NodeShapes.trapezoid_alt.value
-    double_circle      = _int.NodeShapes.double_circle.value
-
 
 class Layout(_Enum):
     top_to_bottom  = _int.Layout.top_to_bottom.value
     bottom_to_top  = _int.Layout.bottom_to_top.value
     left_to_right  = _int.Layout.left_to_right.value
     right_to_left  = _int.Layout.right_to_left.value
-
 
 class ArrowType(_Enum):
     normal        = _int.ArrowType.normal.value

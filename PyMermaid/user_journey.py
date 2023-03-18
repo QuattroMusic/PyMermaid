@@ -1,10 +1,8 @@
 # +---------+
 # | imports |
 # +---------+
-import PyMermaid.user_journey_diagram._internal_user_journey as _internal
-from typing import Union as _Union
-from typing import List as _List
-from typing import Tuple as _Tuple
+import PyMermaid.user_journey_diagram.user_journey_diagram as _internal
+from typing import Union as _Union, List as _List, Tuple as _Tuple
 
 
 # +---------------+
