@@ -1,31 +1,28 @@
-# import
 from warnings import warn
+from enum import Enum
+    
+class UserType(Enum):
+    PARTICIPANT = 0
+    ACTOR       = 1
 
-# costants
-participantType_participant = 0
-participantType_actor = 1
+class ArrowType(Enum):
+    LINE         = 0
+    ARROW        = 1
+    CROSS        = 2
+    OPEN         = 3
+    DOTTED_LINE  = 4
+    DOTTED_ARROW = 5
+    DOTTED_CROSS = 6
+    DOTTED_OPEN  = 7
 
-arrowType_line = 0
-arrowType_arrow = 1
-arrowType_cross = 2
-arrowType_open = 3
-arrowType_dottedLine = 4
-arrowType_dottedArrow = 5
-arrowType_dottedCross = 6
-arrowType_dottedOpen = 7
-
-# variables
 participantNames = []
-
-# code
 code = []
 
-
-class Participant:
-    def __init__(self, name: str, type: int = 0, customId: str = ""):
-        self.name = name
-        self.type = type
-        self.customId = customId
+class User:
+    def __init__(self, name: str, userType: UserType = UserType.PARTICIPANT, customId: str = ""):
+        self.name: str = name
+        self.userType: UserType = userType
+        self.customId: str = customId
 
         self._addToCode()
 
@@ -44,23 +41,22 @@ class Participant:
 
         participantNames.append(self.name)
 
-        if self.type == 0:
+        if self.userType == UserType.PARTICIPANT:
             code.append(f"participant {self.name}{obj1}")
-        elif self.type == 1:
+        elif self.userType == UserType.ACTOR:
             code.append(f"actor {self.name}{obj1}")
         else:
-            warn("Type parameter must be 0 or 1", Warning, 3)
+            warn("Type parameter must a UserType enum", Warning, 3)
             exit()
 
 
-def link(a: Participant, b: Participant, sentence: str = "", arrow_type: int = 1) -> None:
+def link(a: User, b: User, sentence: str = "", arrow_type: ArrowType = ArrowType.ARROW) -> None:
     arrows = ["->", "->>", "-x", "-)", "-->", "-->>", "--x", "--)"]
 
-    code.append(f"{a.customId}{arrows[arrow_type]}{b.customId}: {sentence}")
+    code.append(f"{a.customId}{arrows[arrow_type.value]}{b.customId}: {sentence}")
 
 
 def evaluate() -> str:
-    global code
     if len(code) == 0:
         warn("The code is empty", Warning, 3)
         exit()
@@ -73,3 +69,10 @@ def evaluate() -> str:
     final += "```"
 
     return final
+    
+if __name__ == "__main__":
+    p1 = User("Marco", UserType.ACTOR)
+    p2 = User("Alice", UserType.ACTOR)
+    link(p1, p2, sentence = 'Hi Alice', arrow_type = ArrowType.CROSS)
+    link(p2, p1, sentence = 'Hi Marco', arrow_type = ArrowType.OPEN)
+    print(evaluate())
